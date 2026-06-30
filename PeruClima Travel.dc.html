@@ -3,16 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&w=800&q=65&fit=crop" data-resource-id="photoMachu" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&w=800&q=65&fit=crop" data-resource-id="photoLaguna" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&w=800&q=65&fit=crop" data-resource-id="photoOxapampa" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1580289143260-3c2223f7dcd0?auto=format&w=800&q=65&fit=crop" data-resource-id="photoCusco" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=800&q=65&fit=crop" data-resource-id="photoMancora" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&w=800&q=65&fit=crop" data-resource-id="photoHuaraz" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1458400411961-f3ee2b04fe28?auto=format&w=800&q=65&fit=crop" data-resource-id="photoColca" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1520116468816-95b69f847357?auto=format&w=800&q=65&fit=crop" data-resource-id="photoParacas" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1516026672322-bc52d61a5558?auto=format&w=800&q=65&fit=crop" data-resource-id="photoIquitos" />
-<meta name="ext-resource-dependency" content="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&w=800&q=65&fit=crop" data-resource-id="photoLima" />
 <script src="./support.js"></script>
 </head>
 <body>
@@ -193,7 +183,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
         <div style="position:relative;z-index:2;height:100%;padding:56px 20px 22px;display:flex;flex-direction:column;justify-content:space-between;">
           <div style="display:flex;align-items:center;justify-content:space-between;">
             <button onClick="{{ backToMain }}" style="cursor:pointer;width:40px;height:40px;border-radius:13px;border:none;background:rgba(255,255,255,.22);backdrop-filter:blur(8px);color:#fff;font-size:17px;border:1px solid rgba(255,255,255,.3);">←</button>
-            <button onClick="{{ shareDestination }}" style="cursor:pointer;width:40px;height:40px;border-radius:13px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.18);backdrop-filter:blur(8px);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;">⎘</button>
+            <button onClick="{{ shareDestination }}" style="cursor:pointer;width:40px;height:40px;border-radius:13px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.18);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></button>
           </div>
           <div>
             <span style="display:inline-block;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.2);color:#fff;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);">{{ fd.regionLabel }}</span>
@@ -229,8 +219,9 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
         <!-- date range button -->
         <button onClick="{{ openDateSheet }}" style="cursor:pointer;width:100%;text-align:left;border:1.5px solid #E2E8F0;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border-radius:20px;padding:15px 17px;margin-bottom:14px;font-family:inherit;display:flex;align-items:center;gap:12px;">
           <span style="font-size:20px;">📅</span>
-          <div style="flex:1;"><p style="margin:0;font-size:11px;font-weight:800;color:#8A94A3;text-transform:uppercase;letter-spacing:.06em;">Rango de estadía</p><p style="margin:3px 0 0;font-size:14px;font-weight:800;color:#1A202C;">{{ fd.daysLabel }} · {{ fd.seasonDesc }}</p></div>
-          <div style="padding:6px 11px;border-radius:11px;background:{{ fd.seasonBg }};"><span style="font-size:12px;font-weight:800;color:{{ fd.seasonColor }};">{{ fd.dateRange }}</span></div>
+          <div style="flex:1;"><p style="margin:0;font-size:11px;font-weight:800;color:#8A94A3;text-transform:uppercase;letter-spacing:.06em;">Rango de estadía</p><p style="margin:3px 0 0;font-size:14px;font-weight:800;color:{{ fd.datePromptColor }};">{{ fd.datePrompt }}</p></div>
+          <sc-if value="{{ fd.hasDates }}" hint-placeholder-val="{{ false }}"><div style="padding:6px 11px;border-radius:11px;background:{{ fd.seasonBg }};flex-shrink:0;"><span style="font-size:12px;font-weight:800;color:{{ fd.seasonColor }};">{{ fd.dateRange }}</span></div></sc-if>
+          <sc-if value="{{ fd.notHasDates }}" hint-placeholder-val="{{ false }}"><div style="padding:6px 11px;border-radius:11px;background:#EDF2F7;flex-shrink:0;"><span style="font-size:12px;font-weight:800;color:#8A94A3;">Elegir →</span></div></sc-if>
         </button>
 
         <!-- semaforo -->
@@ -293,7 +284,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
       <div style="padding:14px 20px 0;">
         <div style="display:flex;gap:10px;margin-bottom:8px;">
           <sc-if value="{{ showTrekChip }}" hint-placeholder-val="{{ true }}">
-          <button onClick="{{ toggleTrekking }}" style="cursor:pointer;flex:1;border-radius:15px;padding:13px;font-family:inherit;font-weight:800;font-size:14px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;{{ trekStyle }}">🥾 Trekking</button>
+          <button onClick="{{ toggleTrekking }}" style="cursor:pointer;flex:1;border-radius:15px;padding:13px;font-family:inherit;font-weight:800;font-size:14px;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;{{ trekStyle }}">🏕️ Aventura</button>
           </sc-if>
           <button onClick="{{ openGroup }}" style="cursor:pointer;flex:1;border-radius:15px;padding:13px;font-family:inherit;font-weight:800;font-size:14px;background:#fff;color:#1A202C;border:1.5px solid #E2E8F0;display:flex;align-items:center;justify-content:center;gap:8px;">👥 Modo Grupal</button>
         </div>
@@ -316,10 +307,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
                   <div style="display:flex;align-items:center;gap:6px;margin-top:3px;flex-wrap:wrap;">
                     <sc-if value="{{ i.byChip }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;font-weight:800;padding:2px 7px;border-radius:99px;background:{{ i.byColor }}1f;color:{{ i.byColor }};">{{ i.byChip }}</span></sc-if>
                     <sc-if value="{{ i.markedBy }}" hint-placeholder-val="{{ false }}">
-                      <div style="display:flex;align-items:center;gap:4px;">
-                        <div style="width:18px;height:18px;border-radius:99px;background:{{ i.markedByColor }};color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;">{{ i.markedByInitial }}</div>
-                        <span style="font-size:10.5px;font-weight:700;color:#8A94A3;">{{ i.markedBy }}</span>
-                      </div>
+                      <div style="width:18px;height:18px;border-radius:99px;background:{{ i.markedByColor }};color:#fff;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;">{{ i.markedByInitial }}</div>
                     </sc-if>
                   </div>
                 </div>
@@ -507,7 +495,10 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
       <p style="margin:0 0 14px;font-size:13px;color:#5B6573;line-height:1.4;">Logística compartida. Coordinen quién lleva qué.</p>
       <div style="display:flex;gap:9px;margin-bottom:14px;">
         <sc-for list="{{ groupMembers }}" as="mb" hint-placeholder-count="3">
-          <div style="flex:1;text-align:center;border-radius:16px;padding:12px 6px;background:#fff;border:1px solid #F0F2F5;">
+          <div style="flex:1;text-align:center;border-radius:16px;padding:12px 6px;background:#fff;border:1px solid #F0F2F5;position:relative;">
+            <sc-if value="{{ mb.canRemove }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ mb.onRemove }}" style="cursor:pointer;position:absolute;top:5px;right:5px;width:18px;height:18px;border-radius:99px;border:none;background:#F0F2F5;color:#8A94A3;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">✕</button>
+            </sc-if>
             <div style="width:42px;height:42px;border-radius:99px;margin:0 auto 7px;background:{{ mb.color }};color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;position:relative;">{{ mb.initials }}<span style="position:absolute;bottom:-1px;right:-1px;width:13px;height:13px;border-radius:99px;background:#2A9D8F;border:2px solid #fff;animation:pcPulse 1.4s infinite;"></span></div>
             <p style="margin:0;font-size:12px;font-weight:800;color:#1A202C;">{{ mb.name }}</p>
             <p style="margin:1px 0 0;font-size:10.5px;font-weight:700;color:#8A94A3;">{{ mb.count }} ítems</p>
@@ -535,6 +526,7 @@ input[type="date"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer;
           </sc-for>
         </sc-if>
       </div>
+      <button onClick="{{ leaveGroup }}" style="cursor:pointer;width:100%;border:1.5px solid #FFD5D5;background:#FFF5F5;border-radius:16px;padding:12px;font-family:inherit;font-size:14px;font-weight:800;color:#E63946;margin-bottom:9px;display:flex;align-items:center;justify-content:center;gap:8px;">🚪 Salir del Viaje Grupal</button>
       <button onClick="{{ copyLink }}" style="cursor:pointer;width:100%;border:none;border-radius:16px;padding:15px;font-family:inherit;font-size:15px;font-weight:800;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:9px;{{ copyStyle }}">{{ copyLabel }}</button>
     </div>
   </div>
@@ -590,9 +582,9 @@ class Component extends DCLogic {
       groupOpen:false, copied:false, celebrate:false,
       friajeOpen:false, downloaded:false, trips:[],
       activeTab:'dashboard', fromTab:'dashboard',
-      startDate:fmtDate(today), endDate:fmtDate(end3),
+      startDate:'', endDate:'',
       showSugg:false, dateSheetOpen:false, shareToast:false,
-      revealedTripId:null,
+      revealedTripId:null, removedMembers:[],
     };
     this.screenRef = React.createRef();
     this._prevScreen = start;
@@ -614,16 +606,16 @@ class Component extends DCLogic {
   componentWillUnmount() { if(this._gi) clearInterval(this._gi); }
 
   DESTS = [
-    {id:'machu',name:'Machu Picchu',dept:'Cusco',region:'sierra',emoji:'⛅',tempC:18,uv:11,rain:30,hum:70,wind:8,alt:2430,semaforo:'green',semLabel:'Época perfecta',semDesc:'Temporada seca: cielos despejados, ideal para la caminata.',photo:(window.__resources&&window.__resources.photoMachu)||'https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&w=800&q=65&fit=crop'},
-    {id:'laguna69',name:'Laguna 69',dept:'Áncash',region:'sierra',emoji:'☀️',tempC:8,uv:9,rain:20,hum:55,wind:14,alt:4600,semaforo:'amber',semLabel:'Exige aclimatación',semDesc:'Gran altitud y frío seco. Aclimátate 2 días en Huaraz antes.',photo:(window.__resources&&window.__resources.photoLaguna)||'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&w=800&q=65&fit=crop'},
-    {id:'oxapampa',name:'Selva de Oxapampa',dept:'Pasco',region:'selva',emoji:'🌧️',tempC:26,uv:7,rain:60,hum:88,wind:6,alt:1814,semaforo:'amber',semLabel:'Lluvias frecuentes',semDesc:'Alta probabilidad de lluvia tropical por la tarde.',photo:(window.__resources&&window.__resources.photoOxapampa)||'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&w=800&q=65&fit=crop'},
-    {id:'cusco',name:'Cusco Ciudad',dept:'Cusco',region:'sierra',emoji:'⛅',tempC:16,uv:10,rain:25,hum:60,wind:9,alt:3399,semaforo:'green',semLabel:'Buen momento',semDesc:'Días soleados y noches muy frías. Lleva abrigo.',photo:(window.__resources&&window.__resources.photoCusco)||'https://images.unsplash.com/photo-1580289143260-3c2223f7dcd0?auto=format&w=800&q=65&fit=crop'},
-    {id:'mancora',name:'Máncora',dept:'Piura',region:'costa',emoji:'☀️',tempC:28,uv:9,rain:5,hum:75,wind:16,alt:5,semaforo:'green',semLabel:'Playa perfecta',semDesc:'Sol todo el día y mar cálido. Protección UV alta.',photo:(window.__resources&&window.__resources.photoMancora)||'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=800&q=65&fit=crop'},
-    {id:'huaraz',name:'Huaraz',dept:'Áncash',region:'sierra',emoji:'☀️',tempC:17,uv:10,rain:20,hum:50,wind:11,alt:3052,semaforo:'green',semLabel:'Ideal para trekking',semDesc:'Cielo despejado, perfecto para la Cordillera Blanca.',photo:(window.__resources&&window.__resources.photoHuaraz)||'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&w=800&q=65&fit=crop'},
-    {id:'colca',name:'Valle del Colca',dept:'Arequipa',region:'sierra',emoji:'☀️',tempC:19,uv:11,rain:10,hum:45,wind:13,alt:3635,semaforo:'green',semLabel:'Cielos despejados',semDesc:'Excelente avistamiento de cóndores al amanecer.',photo:(window.__resources&&window.__resources.photoColca)||'https://images.unsplash.com/photo-1458400411961-f3ee2b04fe28?auto=format&w=800&q=65&fit=crop'},
-    {id:'paracas',name:'Paracas',dept:'Ica',region:'costa',emoji:'☀️',tempC:24,uv:8,rain:0,hum:65,wind:22,alt:2,semaforo:'amber',semLabel:'Vientos fuertes',semDesc:'Tardes muy ventosas. Asegura bien tus cosas.',photo:(window.__resources&&window.__resources.photoParacas)||'https://images.unsplash.com/photo-1520116468816-95b69f847357?auto=format&w=800&q=65&fit=crop'},
-    {id:'iquitos',name:'Iquitos',dept:'Loreto',region:'selva',emoji:'⛈️',tempC:31,uv:8,rain:70,hum:92,wind:5,alt:106,semaforo:'red',semLabel:'Temporada de lluvias',semDesc:'Calor húmedo extremo y tormentas tropicales diarias.',photo:(window.__resources&&window.__resources.photoIquitos)||'https://images.unsplash.com/photo-1516026672322-bc52d61a5558?auto=format&w=800&q=65&fit=crop'},
-    {id:'lima',name:'Lima',dept:'Lima',region:'costa',emoji:'🌫️',tempC:20,uv:6,rain:0,hum:82,wind:12,alt:154,semaforo:'green',semLabel:'Clima estable',semDesc:'Cielo nublado típico sin lluvia. Capa ligera.',photo:(window.__resources&&window.__resources.photoLima)||'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&w=800&q=65&fit=crop'},
+    {id:'machu',name:'Machu Picchu',dept:'Cusco',region:'sierra',emoji:'⛅',tempC:18,uv:11,rain:30,hum:70,wind:8,alt:2430,semaforo:'green',semLabel:'Época perfecta',semDesc:'Temporada seca: cielos despejados, ideal para la caminata.',photo:'https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&w=800&q=65&fit=crop'},
+    {id:'laguna69',name:'Laguna 69',dept:'Áncash',region:'sierra',emoji:'☀️',tempC:8,uv:9,rain:20,hum:55,wind:14,alt:4600,semaforo:'amber',semLabel:'Exige aclimatación',semDesc:'Gran altitud y frío seco. Aclimátate 2 días en Huaraz antes.',photo:'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&w=800&q=65&fit=crop'},
+    {id:'oxapampa',name:'Selva de Oxapampa',dept:'Pasco',region:'selva',emoji:'🌧️',tempC:26,uv:7,rain:60,hum:88,wind:6,alt:1814,semaforo:'amber',semLabel:'Lluvias frecuentes',semDesc:'Alta probabilidad de lluvia tropical por la tarde.',photo:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&w=800&q=65&fit=crop'},
+    {id:'cusco',name:'Cusco Ciudad',dept:'Cusco',region:'sierra',emoji:'⛅',tempC:16,uv:10,rain:25,hum:60,wind:9,alt:3399,semaforo:'green',semLabel:'Buen momento',semDesc:'Días soleados y noches muy frías. Lleva abrigo.',photo:'https://images.unsplash.com/photo-1580289143260-3c2223f7dcd0?auto=format&w=800&q=65&fit=crop'},
+    {id:'mancora',name:'Máncora',dept:'Piura',region:'costa',emoji:'☀️',tempC:28,uv:9,rain:5,hum:75,wind:16,alt:5,semaforo:'green',semLabel:'Playa perfecta',semDesc:'Sol todo el día y mar cálido. Protección UV alta.',photo:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&w=800&q=65&fit=crop'},
+    {id:'huaraz',name:'Huaraz',dept:'Áncash',region:'sierra',emoji:'☀️',tempC:17,uv:10,rain:20,hum:50,wind:11,alt:3052,semaforo:'green',semLabel:'Ideal para trekking',semDesc:'Cielo despejado, perfecto para la Cordillera Blanca.',photo:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&w=800&q=65&fit=crop'},
+    {id:'colca',name:'Valle del Colca',dept:'Arequipa',region:'sierra',emoji:'☀️',tempC:19,uv:11,rain:10,hum:45,wind:13,alt:3635,semaforo:'green',semLabel:'Cielos despejados',semDesc:'Excelente avistamiento de cóndores al amanecer.',photo:'https://images.unsplash.com/photo-1458400411961-f3ee2b04fe28?auto=format&w=800&q=65&fit=crop'},
+    {id:'paracas',name:'Paracas',dept:'Ica',region:'costa',emoji:'☀️',tempC:24,uv:8,rain:0,hum:65,wind:22,alt:2,semaforo:'amber',semLabel:'Vientos fuertes',semDesc:'Tardes muy ventosas. Asegura bien tus cosas.',photo:'https://images.unsplash.com/photo-1520116468816-95b69f847357?auto=format&w=800&q=65&fit=crop'},
+    {id:'iquitos',name:'Iquitos',dept:'Loreto',region:'selva',emoji:'⛈️',tempC:31,uv:8,rain:70,hum:92,wind:5,alt:106,semaforo:'red',semLabel:'Temporada de lluvias',semDesc:'Calor húmedo extremo y tormentas tropicales diarias.',photo:'https://images.unsplash.com/photo-1516026672322-bc52d61a5558?auto=format&w=800&q=65&fit=crop'},
+    {id:'lima',name:'Lima',dept:'Lima',region:'costa',emoji:'🌫️',tempC:20,uv:6,rain:0,hum:82,wind:12,alt:154,semaforo:'green',semLabel:'Clima estable',semDesc:'Cielo nublado típico sin lluvia. Capa ligera.',photo:'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?auto=format&w=800&q=65&fit=crop'},
   ];
   ALERTS = [
     {icon:'⚠️',zone:'Sierra Central',title:'Aviso de huaicos nivel naranja',text:'Lluvias intensas activan quebradas.',accent:'#E63946',bg:'linear-gradient(160deg,#FFE4E6,#FFF1F2)',shadow:'rgba(230,57,70,.35)'},
@@ -803,16 +795,29 @@ class Component extends DCLogic {
       const sel=this.DESTS.find(d=>d.id===this.state.selectedId);
       if(!sel) return;
       const items=this.buildChecklist(sel).filter(i=>i.shared);
-      const avail=items.filter(i=>!this.state.memberMark[i.id]);
+      const avail=items.filter(i=>!this.state.memberMark[i.id]&&!this.state.skipped[i.id]);
       if(!avail.length){clearInterval(this._gi);this._gi=null;return;}
       const pick=avail[Math.floor(Math.random()*avail.length)];
-      const who=Math.random()<0.5?'Ana':'Carlos';
+      const pool=['Ana','Carlos'].filter(n=>!this.state.removedMembers.includes(n));
+      if(!pool.length){clearInterval(this._gi);this._gi=null;return;}
+      const who=pool[Math.floor(Math.random()*pool.length)];
       this.setState(s=>({checked:{...s.checked,[pick.id]:true},memberMark:{...s.memberMark,[pick.id]:who}}));
     },1600);
   }
   openGroup(){this.setState({groupOpen:true});this.startGroupSim();}
   closeGroup(){if(this._gi){clearInterval(this._gi);this._gi=null;}this.setState({groupOpen:false});}
   copyLink(){try{navigator.clipboard&&navigator.clipboard.writeText('https://peruclima.app/mochila/AX29K');}catch(e){}this.setState({copied:true});setTimeout(()=>this.setState({copied:false}),1800);}
+  removeMember(name){
+    this.setState(s=>{
+      const mm={...s.memberMark};
+      Object.keys(mm).forEach(k=>{if(mm[k]===name)delete mm[k];});
+      return{removedMembers:[...s.removedMembers,name],memberMark:mm,checked:{...s.checked,...Object.fromEntries(Object.entries(s.checked).filter(([k])=>!Object.keys(mm).includes(k)))}};
+    });
+  }
+  leaveGroup(){
+    if(this._gi){clearInterval(this._gi);this._gi=null;}
+    this.setState({memberMark:{},removedMembers:[],groupOpen:false});
+  }
 
   // --- finish ---
   finishTrip(){
@@ -890,13 +895,17 @@ class Component extends DCLogic {
     const roadOk=selDest.rain<40;
     const seData=this.seasonalData(selDest);
     const days=this.tripDays();
+    const hasDates=!!s.startDate&&!!s.endDate;
     const daysLabel=days===1?'1 día':`${days} días`;
-    const dateRange=this.fmtShort(s.startDate)+' → '+this.fmtShort(s.endDate);
+    const dateRange=hasDates?this.fmtShort(s.startDate)+' → '+this.fmtShort(s.endDate):'';
     const seasonColor=seData.adjRain>50?'#E63946':seData.adjRain>30?'#E9A23B':'#2A9D8F';
     const fd={
       name:selDest.name,dept:selDest.dept,alt:selDest.alt,emoji:selDest.emoji,photo:selDest.photo,
       regionLabel:this.regionLabel(selDest.region),regionColor:sColor,
       ambientBg:this.ambient(selDest),tempDisp:this.fmt(selDest.tempC),
+      hasDates,notHasDates:!hasDates,
+      datePrompt:hasDates?`${daysLabel} · ${seData.period}`:'Selecciona tus fechas de viaje',
+      datePromptColor:hasDates?'#1A202C':'#8A94A3',
       daysLabel,dateRange,seasonDesc:seData.period,seasonColor,
       seasonBg:seasonColor+'18',
       rainHours:this.rainHours(selDest),
@@ -951,11 +960,12 @@ class Component extends DCLogic {
     const memberMarkCounts={Ana:0,Carlos:0,you:0};
     sharedAll.forEach(i=>{if(s.memberMark[i.id]) memberMarkCounts[s.memberMark[i.id]]=(memberMarkCounts[s.memberMark[i.id]]||0)+1;});
     const youShared=sharedAll.filter(i=>s.checked[i.id]&&!s.memberMark[i.id]).length;
-    const groupMembers=[
-      {name:'Tú',initials:'TÚ',color:'#1A202C',count:youShared},
-      {name:'Ana',initials:'A',color:'#F4A261',count:memberMarkCounts.Ana||0},
-      {name:'Carlos',initials:'C',color:'#2A9D8F',count:memberMarkCounts.Carlos||0},
+    const allGroupMembers=[
+      {name:'Tú',initials:'TÚ',color:'#1A202C',count:youShared,canRemove:false,onRemove:null},
+      {name:'Ana',initials:'A',color:'#F4A261',count:memberMarkCounts.Ana||0,canRemove:!s.removedMembers.includes('Ana'),onRemove:()=>this.removeMember('Ana')},
+      {name:'Carlos',initials:'C',color:'#2A9D8F',count:memberMarkCounts.Carlos||0,canRemove:!s.removedMembers.includes('Carlos'),onRemove:()=>this.removeMember('Carlos')},
     ];
+    const groupMembers=allGroupMembers.filter(m=>!s.removedMembers.includes(m.name));
     const memberColor={Ana:'#F4A261',Carlos:'#2A9D8F'};
     const sharedItems=sharedAll.map(i=>{
       const mb=s.memberMark[i.id];
@@ -1088,6 +1098,7 @@ class Component extends DCLogic {
       copyLink:()=>this.copyLink(),
       copyLabel:s.copied?'✓ ¡Enlace copiado!':'🔗 Copiar enlace de invitación',
       copyStyle:s.copied?'background:#2A9D8F;color:#fff;':'background:#1A202C;color:#fff;',
+      leaveGroup:()=>this.leaveGroup(),
       // date sheet
       dateSheetOpen:s.dateSheetOpen,
       closeDateSheet:()=>this.closeDateSheet(),
@@ -1103,40 +1114,5 @@ class Component extends DCLogic {
   }
 }
 </script>
-<template id="__bundler_thumbnail" data-bg-color="#F8F9FA">
-  <svg viewBox="0 0 390 844" xmlns="http://www.w3.org/2000/svg">
-    <rect width="390" height="844" fill="#F8F9FA"/>
-    <rect x="30" y="30" width="330" height="784" rx="44" fill="#1A202C"/>
-    <rect x="38" y="38" width="314" height="768" rx="38" fill="#F8F9FA"/>
-    <!-- dynamic gradient bg -->
-    <ellipse cx="120" cy="100" rx="200" ry="180" fill="rgba(253,234,218,0.9)"/>
-    <ellipse cx="310" cy="740" rx="180" ry="160" fill="rgba(197,235,228,0.85)"/>
-    <!-- logo -->
-    <rect x="68" y="80" width="36" height="36" rx="10" fill="url(#logoGrad)"/>
-    <text x="86" y="103" text-anchor="middle" font-size="18" fill="white">⛰</text>
-    <text x="114" y="103" font-size="16" font-weight="800" fill="#1A202C">Perú</text>
-    <text x="150" y="103" font-size="16" font-weight="800" fill="#2A9D8F">Clima</text>
-    <!-- glass card -->
-    <rect x="58" y="140" width="274" height="300" rx="28" fill="rgba(255,255,255,0.48)" stroke="rgba(255,255,255,0.85)" stroke-width="1"/>
-    <text x="195" y="230" text-anchor="middle" font-size="72">🏔️</text>
-    <text x="195" y="310" text-anchor="middle" font-size="20" font-weight="900" fill="#1A202C">El clima de tu ruta,</text>
-    <text x="195" y="334" text-anchor="middle" font-size="20" font-weight="900" fill="#1A202C">bajo control.</text>
-    <text x="195" y="362" text-anchor="middle" font-size="13" fill="#5B6573">Microclimas de Costa, Sierra y Selva</text>
-    <!-- CTA -->
-    <rect x="68" y="395" width="274" height="46" rx="16" fill="#1A202C"/>
-    <text x="195" y="423" text-anchor="middle" font-size="14" font-weight="800" fill="white">Siguiente →</text>
-    <!-- bottom nav hint -->
-    <rect x="68" y="760" width="274" height="56" rx="24" fill="rgba(248,249,250,0.82)" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
-    <text x="130" y="793" text-anchor="middle" font-size="20">🏠</text>
-    <text x="195" y="793" text-anchor="middle" font-size="20">📅</text>
-    <text x="260" y="793" text-anchor="middle" font-size="20">👤</text>
-    <defs>
-      <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#F4A261"/>
-        <stop offset="100%" stop-color="#2A9D8F"/>
-      </linearGradient>
-    </defs>
-  </svg>
-</template>
 </body>
 </html>
